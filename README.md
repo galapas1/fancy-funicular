@@ -2,7 +2,7 @@
 
 ## Solution Summary
 
-- [Backend service](app) - Kotlin Spring Boot Application
+- [Backend service](src) - Kotlin Spring Boot Application
 
 The fancy-funicular accepts and returns perferences (e.g., pizza toppings).
 
