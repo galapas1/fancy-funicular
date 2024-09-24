@@ -9,7 +9,7 @@ generate_post_data() {
 {
   "emailAddress": "galapas@gmail.com",
   "tags": [
-    "onion", "olives", "peppers"
+    "onions", "olives", "peppers", "onions"
   ]
 }
 EOF

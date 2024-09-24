@@ -12,6 +12,6 @@ class WebConfig : WebMvcConfigurer {
     @Value("\${spring.application.apikey}") lateinit var apiKey: String
 
     override fun addInterceptors(registry: InterceptorRegistry) {
-        registry.addInterceptor(ApiKeyInterceptor(apiKey)).addPathPatterns("/v1/api/preferences/")
+        registry.addInterceptor(ApiKeyInterceptor(apiKey)).addPathPatterns("/v1/api/preferences/**")
     }
 }

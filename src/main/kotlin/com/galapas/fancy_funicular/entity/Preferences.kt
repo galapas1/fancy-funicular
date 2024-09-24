@@ -9,5 +9,5 @@ data class Preferences(var emailAddr: String? = null) {
 
     @Column(nullable = false, unique = true) var emailAddress: String? = emailAddr
 
-    @Column var tags: Array<String> = arrayOf<String>()
+    @Column var tags: List<String> = listOf<String>()
 }

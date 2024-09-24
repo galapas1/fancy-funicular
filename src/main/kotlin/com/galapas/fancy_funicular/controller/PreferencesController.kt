@@ -22,6 +22,29 @@ class PreferencesController {
         this.prefsRepository = prefsRepository
     }
 
+    @GetMapping("/preferences/")
+    fun getPreferences(): Message {
+        var existingPrefs = prefsRepository.findAll()
+        if (existingPrefs == null) {
+            return Message(
+                mapOf("status" to "failed"),
+                "No topping preferences found.",
+                HttpStatus.NO_CONTENT,
+            )
+        }
+
+        val preferenceCounts = mutableMapOf<String, Int>()
+        for (pref in existingPrefs) {
+            for (tag in pref.tags) {
+                preferenceCounts[tag] = preferenceCounts.getOrDefault(tag, 0) + 1
+            }
+        }
+
+        val sb = StringBuilder()
+        preferenceCounts.forEach { entry -> sb.append("${entry.key}: ${entry.value} user(s)") }
+        return Message(mapOf("data" to sp.toString()), "All preferences", HttpStatus.OK)
+    }
+
     @GetMapping("/preferences/{emailAddress}")
     fun getPreferences(@PathVariable emailAddress: String): Message {
         var existingPrefs = prefsRepository.findByEmailAddress(emailAddress).orElse(null)
@@ -34,8 +57,8 @@ class PreferencesController {
         }
 
         return Message(
-            mapOf("status" to "success"),
-            "Preferences for ${existingPrefs.emailAddress} are ${existingPrefs.tags.joinToString(",")}",
+            mapOf("data" to existingPrefs.tags.joinToString(",")),
+            "Preferences for ${existingPrefs.emailAddress}",
             HttpStatus.OK,
         )
     }
@@ -45,7 +68,12 @@ class PreferencesController {
         try {
             var existingPrefs =
                 prefsRepository.findByEmailAddress(preferences.emailAddress).orElse(null)
+
             if (existingPrefs == null) {
+                // remove dups...
+                preferences.tags = preferences.tags.distinct()
+
+                // TODO: see if all tags are valid topping
                 prefsRepository.save(preferences)
 
                 return Message(
@@ -55,7 +83,7 @@ class PreferencesController {
                 )
             }
 
-            existingPrefs.tags = preferences.tags
+            existingPrefs.tags = preferences.tags.distinct()
             prefsRepository.save(existingPrefs)
 
             return Message(
