@@ -41,8 +41,14 @@ class PreferencesController {
         }
 
         val sb = StringBuilder()
-        preferenceCounts.forEach { entry -> sb.append("${entry.key}: ${entry.value} user(s)") }
-        return Message(mapOf("data" to sp.toString()), "All preferences", HttpStatus.OK)
+        for (entry in preferenceCounts) {
+            if (sb.length > 0) {
+                sb.append(", ")
+            }
+            sb.append("${entry.key}: ${entry.value} user(s)")
+        }
+
+        return Message(mapOf("data" to sb.toString()), "All preferences", HttpStatus.OK)
     }
 
     @GetMapping("/preferences/{emailAddress}")
