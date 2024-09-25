@@ -3,6 +3,7 @@ package com.galapas.fancy_funicular.controller
 import com.galapas.fancy_funicular.dto.Message
 import com.galapas.fancy_funicular.entity.Preferences
 import com.galapas.fancy_funicular.repository.PreferencesRepository
+import jakarta.validation.constraints.Email
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.GetMapping
@@ -52,7 +53,7 @@ class PreferencesController {
     }
 
     @GetMapping("/preferences/{emailAddress}")
-    fun getPreferences(@PathVariable emailAddress: String): Message {
+    fun getPreferences(@PathVariable @Email emailAddress: String): Message {
         var existingPrefs = prefsRepository.findByEmailAddress(emailAddress).orElse(null)
         if (existingPrefs == null) {
             return Message(
