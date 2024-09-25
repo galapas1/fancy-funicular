@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @CrossOrigin(origins = arrayOf("*"))
-@RequestMapping("/v1/api")
+@RequestMapping("/api/v1/")
 class HealthController {
 
     @Value("\${spring.datasource.url}") lateinit var dataSourceUrl: String

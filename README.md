@@ -9,10 +9,10 @@ The fancy-funicular accepts and returns perferences (e.g., pizza toppings).
 Note the presence of a `scripts/` directory under the project root. These scripts
 will aid in exercising the endpoints exposed by the application.
 
-- `GET /v1/api/health` - see `scripts/check-health.sh`
-- `POST /v1/api/preferences/` - see `scripts/post-prefs.sh`
-- `GET /v1/api/preferences/{emailAddress}` - see `scripts/get-prefs.sh`
-- `GET /v1/api/preferences/` - see `scripts/all-prefs.sh`
+- `GET /api/v1/health` - see `scripts/check-health.sh`
+- `POST /api/v1/preferences/` - see `scripts/post-prefs.sh`
+- `GET /api/v1/preferences/{emailAddress}` - see `scripts/get-prefs.sh`
+- `GET /api/v1/preferences/` - see `scripts/all-prefs.sh`
 
 ## Tech Stack
 

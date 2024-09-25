@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @CrossOrigin(origins = arrayOf("*"))
-@RequestMapping("/v1/api")
+@RequestMapping("/api/v1/")
 class PreferencesController {
     lateinit var prefsService: PreferencesService
 
