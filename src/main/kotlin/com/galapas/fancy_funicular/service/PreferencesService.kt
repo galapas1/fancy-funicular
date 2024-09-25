@@ -1,4 +1,4 @@
-package com.galapas.fancy_funicular.controller
+package com.galapas.fancy_funicular.service
 
 import com.galapas.fancy_funicular.dto.Message
 import com.galapas.fancy_funicular.entity.Preferences
